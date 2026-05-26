@@ -1,14 +1,8 @@
 package commands
 
 import (
-	"encoding/json"
-	"fmt"
-	"os"
-
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"moul.io/assh/v2/pkg/config"
 )
 
 var buildConfigCommand = &cobra.Command{
@@ -35,54 +29,11 @@ func init() {
 }
 
 func runBuildConfigCommand(cmd *cobra.Command, args []string) error {
-	conf, err := config.Open(viper.GetString("config"))
-	if err != nil {
-		return errors.Wrap(err, "failed to open config file")
-	}
-
-	if viper.GetBool("expand") {
-		for name := range conf.Hosts {
-			conf.Hosts[name], err = conf.GetHost(name)
-			if err != nil {
-				return errors.Wrap(err, "failed to expand hosts")
-			}
-		}
-	}
-
-	if !viper.GetBool("ignore-known-hosts") {
-		if conf.KnownHostsFileExists() == nil {
-			if err := conf.LoadKnownHosts(); err != nil {
-				return errors.Wrap(err, "failed to load known-hosts file")
-			}
-		}
-	}
-
-	if viper.GetBool("no-automatic-rewrite") {
-		conf.DisableAutomaticRewrite()
-	}
-	return conf.WriteSSHConfigTo(os.Stdout)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func runBuildJSONConfigCommand(cmd *cobra.Command, args []string) error {
-	conf, err := config.Open(viper.GetString("config"))
-	if err != nil {
-		return errors.Wrap(err, "failed to open configuration file")
-	}
-
-	if viper.GetBool("expand") {
-		for name := range conf.Hosts {
-			conf.Hosts[name], err = conf.GetHost(name)
-			if err != nil {
-				return errors.Wrap(err, "failed to expand hosts")
-			}
-		}
-	}
-
-	s, err := json.MarshalIndent(conf, "", "  ")
-	if err != nil {
-		return errors.Wrap(err, "failed to marshal config")
-	}
-
-	fmt.Println(string(s))
+	_ = "STUB: not implemented"
 	return nil
 }

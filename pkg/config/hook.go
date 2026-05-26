@@ -1,8 +1,6 @@
 package config
 
 import (
-	"encoding/json"
-
 	"moul.io/assh/v2/pkg/hooks"
 )
 
@@ -17,22 +15,7 @@ type HostHooks struct {
 }
 
 // Length returns the quantity of hooks of any type
-func (hh *HostHooks) Length() int {
-	if hh == nil {
-		return 0
-	}
-	return len(hh.AfterConfigWrite) +
-		len(hh.BeforeConnect) +
-		len(hh.OnConnectError) +
-		len(hh.OnDisconnect) +
-		len(hh.OnConnect)
-}
+func (hh *HostHooks) Length() int { _ = "STUB: not implemented"; return 0 }
 
 // String returns the JSON output
-func (hh *HostHooks) String() string {
-	s, err := json.Marshal(hh)
-	if err != nil {
-		return err.Error()
-	}
-	return string(s)
-}
+func (hh *HostHooks) String() string { _ = "STUB: not implemented"; return "" }

@@ -7,5 +7,6 @@ import "go.uber.org/zap/zapcore"
 
 // LogLevelFromParentSSHProcess inspects parent `ssh` process for eventual passed `-v` flags.
 func LogLevelFromParentSSHProcess() (zapcore.Level, error) {
-	return zapcore.WarnLevel, nil
+	_ = "STUB: not implemented"
+	return *new(zapcore.Level), nil
 }

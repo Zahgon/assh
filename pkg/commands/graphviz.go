@@ -1,13 +1,8 @@
 package commands
 
 import (
-	"fmt"
-
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"moul.io/assh/v2/pkg/config"
-	"moul.io/assh/v2/pkg/config/graphviz"
 )
 
 var graphvizConfigCommand = &cobra.Command{
@@ -25,21 +20,6 @@ func init() {
 }
 
 func runGraphvizConfigCommand(cmd *cobra.Command, args []string) error {
-	conf, err := config.Open(viper.GetString("config"))
-	if err != nil {
-		return errors.Wrap(err, "failed to load config")
-	}
-
-	settings := graphviz.GraphSettings{
-		ShowIsolatedHosts: viper.GetBool("show-isolated-hosts"),
-		NoResolveWildcard: viper.GetBool("no-resolve-wildcard"),
-		NoInherits:        viper.GetBool("no-inheritance-links"),
-	}
-	graph, err := graphviz.Graph(conf, &settings)
-	if err != nil {
-		return errors.Wrap(err, "failed to build graph")
-	}
-
-	fmt.Println(graph)
+	_ = "STUB: not implemented"
 	return nil
 }

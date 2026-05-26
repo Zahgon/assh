@@ -4,6 +4,4 @@ package commands
 
 import "go.uber.org/zap"
 
-func logger() *zap.Logger {
-	return zap.L().Named("assh.pkg.commands")
-}
+func logger() *zap.Logger { _ = "STUB: not implemented"; return nil }

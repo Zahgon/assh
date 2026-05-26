@@ -10,17 +10,8 @@ var (
 )
 
 // SSHFlags contains cobra string and bool flags for SSH
-func SSHFlags() *pflag.FlagSet {
-	flags := pflag.NewFlagSet("SSHFlags", pflag.PanicOnError)
-	// Populate SSHFlags
-	// FIXME: support count flags (-vvv == -v -v -v)
-	// FIXME: support joined bool flags (-it == -i -t)
-	for _, flag := range SSHBoolFlags {
-		flags.Bool(flag, false, "")
-	}
-	for _, flag := range SSHStringFlags {
-		flags.StringSlice(flag, nil, "")
-	}
+func SSHFlags() *pflag.FlagSet { _ = "STUB: not implemented"; return nil }
 
-	return flags
-}
+// Populate SSHFlags
+// FIXME: support count flags (-vvv == -v -v -v)
+// FIXME: support joined bool flags (-it == -i -t)

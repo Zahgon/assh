@@ -4,6 +4,4 @@ package ratelimit
 
 import "go.uber.org/zap"
 
-func logger() *zap.Logger {
-	return zap.L().Named("assh.pkg.ratelimit")
-}
+func logger() *zap.Logger { _ = "STUB: not implemented"; return nil }

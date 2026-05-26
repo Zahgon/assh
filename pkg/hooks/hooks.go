@@ -1,9 +1,6 @@
 package hooks
 
 import (
-	"fmt"
-	"strings"
-
 	composeyaml "github.com/docker/libcompose/yaml"
 )
 
@@ -24,53 +21,12 @@ type RunArgs interface{}
 
 // InvokeAll calls all hooks
 func (h *Hooks) InvokeAll(args RunArgs) (HookDrivers, error) {
-	drivers := HookDrivers{}
-
-	for _, expr := range *h {
-		driver, err := New(expr)
-		if err != nil {
-			return nil, err
-		}
-		drivers = append(drivers, driver)
-	}
-
-	for _, driver := range drivers {
-		if err := driver.Run(args); err != nil {
-			return nil, err
-		}
-	}
-	return drivers, nil
+	_ = "STUB: not implemented"
+	return *new(HookDrivers), nil
 }
 
 // Close closes all hook drivers and returns a slice of errs
-func (hd *HookDrivers) Close() []error {
-	var errs []error
-	for _, driver := range *hd {
-		if err := driver.Close(); err != nil {
-			errs = append(errs, err)
-		}
-	}
-	return errs
-}
+func (hd *HookDrivers) Close() []error { _ = "STUB: not implemented"; return nil }
 
 // New returns an HookDriver instance
-func New(expr string) (HookDriver, error) {
-	driverName := strings.Split(expr, " ")[0]
-	param := strings.Join(strings.Split(expr, " ")[1:], " ")
-	switch driverName {
-	case "write":
-		driver, err := NewWriteDriver(param)
-		return driver, err
-	case "notify":
-		driver, err := NewNotificationDriver(param)
-		return driver, err
-	case "exec":
-		driver, err := NewExecDriver(param)
-		return driver, err
-	case "daemon":
-		driver, err := NewDaemonDriver(param)
-		return driver, err
-	default:
-		return nil, fmt.Errorf("no such driver %q", driverName)
-	}
-}
+func New(expr string) (HookDriver, error) { _ = "STUB: not implemented"; return *new(HookDriver), nil }

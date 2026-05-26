@@ -1,15 +1,5 @@
 package hooks
 
-import (
-	"bytes"
-	"fmt"
-	"os"
-	"os/exec"
-	"runtime"
-
-	"moul.io/assh/v2/pkg/templates"
-)
-
 var possibleShells = []string{
 	"/bin/sh", "/bin/bash", "/bin/zsh",
 	"/usr/bin/sh", "/usr/bin/bash", "/usr/bin/zsh",
@@ -27,74 +17,27 @@ type ExecDriver struct {
 
 // NewExecDriver returns a ExecDriver instance
 func NewExecDriver(line string) (ExecDriver, error) {
-	return ExecDriver{
-		line: line,
-	}, nil
+	_ = "STUB: not implemented"
+	return *new(ExecDriver), nil
 }
 
 // Run execs a line to the terminal
-func (d ExecDriver) Run(args RunArgs) error {
-	selectedShell := findAvailableShell(possibleShells)
-	if selectedShell == "" {
-		return fmt.Errorf("no available shell found. (tried %s)", possibleShells)
-	}
+func (d ExecDriver) Run(args RunArgs) error { _ = "STUB: not implemented"; return nil }
 
-	command, err := renderCommand(d.line, args)
-	if err != nil {
-		return fmt.Errorf("failed to render command: %w", err)
-	}
-
-	proc := exec.Command(selectedShell, "-c", command) // #nosec
-
-	proc.Stdout = os.Stderr
-	proc.Stderr = os.Stderr
-	proc.Stdin = os.Stdin
-
-	if err = proc.Start(); err != nil {
-		return err
-	}
-
-	return proc.Wait()
-}
+// #nosec
 
 // Close is mandatory for the interface, here it does nothing
-func (d ExecDriver) Close() error { return nil }
+func (d ExecDriver) Close() error { _ = "STUB: not implemented"; return nil }
 
 func renderCommand(line string, tmplArgs RunArgs) (string, error) {
-	tmpl, err := templates.New(line + "\n")
-	if err != nil {
-		return "", err
-	}
-
-	var buff bytes.Buffer
-	if err = tmpl.Execute(&buff, tmplArgs); err != nil {
-		return "", err
-	}
-
-	return buff.String(), nil
+	_ = "STUB: not implemented"
+	return "", nil
 }
 
-func findAvailableShell(shells []string) string {
-	for _, shell := range shells {
-		if isExecutable(shell) {
-			return shell
-		}
-	}
+func findAvailableShell(shells []string) string { _ = "STUB: not implemented"; return "" }
 
-	return ""
-}
+func isExecutable(path string) bool { _ = "STUB: not implemented"; return false }
 
-func isExecutable(path string) bool {
-	info, err := os.Stat(path)
-	if err != nil {
-		return false
-	}
+// on Windows, the executable bit is not necessary
 
-	// on Windows, the executable bit is not necessary
-	if runtime.GOOS == "windows" {
-		return true
-	}
-
-	// on Linux actually check if the file is executable
-	return info.Mode()&0o111 != 0
-}
+// on Linux actually check if the file is executable

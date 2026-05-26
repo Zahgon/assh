@@ -7,13 +7,9 @@ import (
 
 	"moul.io/assh/v2/pkg/utils"
 
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"moul.io/assh/v2/pkg/config"
-	loggerpkg "moul.io/assh/v2/pkg/logger"
 	"moul.io/assh/v2/pkg/version"
 )
 
@@ -72,20 +68,4 @@ func init() {
 	RootCmd.AddCommand(commands...)
 }
 
-func initLogging(debug bool, verbose bool) error {
-	config := zap.NewDevelopmentConfig()
-	config.Level.SetLevel(loggerpkg.MustLogLevel(debug, verbose))
-	if !debug {
-		config.DisableStacktrace = true
-		config.DisableCaller = true
-		config.EncoderConfig.TimeKey = ""
-		config.EncoderConfig.NameKey = ""
-	}
-	config.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
-	l, err := config.Build()
-	if err != nil {
-		return errors.Wrap(err, "failed to initialize logger")
-	}
-	zap.ReplaceGlobals(l)
-	return nil
-}
+func initLogging(debug bool, verbose bool) error { _ = "STUB: not implemented"; return nil }

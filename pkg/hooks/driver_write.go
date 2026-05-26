@@ -1,11 +1,5 @@
 package hooks
 
-import (
-	"os"
-
-	"moul.io/assh/v2/pkg/templates"
-)
-
 // WriteDriver is a driver that writes some texts to the terminal
 type WriteDriver struct {
 	line string
@@ -13,20 +7,12 @@ type WriteDriver struct {
 
 // NewWriteDriver returns a WriteDriver instance
 func NewWriteDriver(line string) (WriteDriver, error) {
-	return WriteDriver{
-		line: line,
-	}, nil
+	_ = "STUB: not implemented"
+	return *new(WriteDriver), nil
 }
 
 // Run writes a line to the terminal
-func (d WriteDriver) Run(args RunArgs) error {
-	tmpl, err := templates.New(d.line + "\n")
-	if err != nil {
-		return err
-	}
-
-	return tmpl.Execute(os.Stderr, args)
-}
+func (d WriteDriver) Run(args RunArgs) error { _ = "STUB: not implemented"; return nil }
 
 // Close is mandatory for the interface, here it does nothing
-func (d WriteDriver) Close() error { return nil }
+func (d WriteDriver) Close() error { _ = "STUB: not implemented"; return nil }
